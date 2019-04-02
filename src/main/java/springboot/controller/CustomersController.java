@@ -22,6 +22,7 @@ import springboot.service.CustomersService;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 
 
 @RestController
@@ -34,10 +35,13 @@ public class CustomersController {
     private CustomersService customersService;
 
     @GetMapping
-    public @ResponseBody String test(){
-        return "Hello bastard!";
+    public @ResponseBody
+    Set<Customer> getAllCustomers(){
+        LOG.info("Getting all customers");
+        Set<Customer> result = customersService.getAllCustomers();
+        LOG.info("Successfully got all customers");
+        return result;
     }
-
 
     @GetMapping("/{id}")
     public @ResponseBody Customer getCustomerById (@PathVariable("id")BigDecimal id){
@@ -55,13 +59,13 @@ public class CustomersController {
     }
 
     @PutMapping("/{id}")
-        public void updateCustomerById(@PathVariable("id") BigDecimal id, @RequestParam("cust_num") BigDecimal cust_num){
-        LOG.info("Updating Customer, id={}, cust_num={}", id, cust_num);
+        public void updateCustomerById(@PathVariable("id") BigDecimal id, @RequestParam("company") String company){
+        LOG.info("Updating Customer, id={}, company={}", id, company);
         Customer customer = customersService.findCustomerById(id);
         if(Objects.isNull(customer)){
             LOG.warn("Can't update not existing customer");
         } else {
-            customer.setCustNum(cust_num);
+            customer.setCompany(company);
             customersService.updateCustomer(customer);
         }
         LOG.info("Customer updated");

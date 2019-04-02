@@ -1,5 +1,7 @@
 package springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -14,6 +16,7 @@ public class Customer implements java.io.Serializable {
     @Column(name = "CUST_NUM", unique = true, nullable = false, precision = 22, scale = 0)
     private BigDecimal custNum;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUST_REP")
     private Salesrep salesrep;
@@ -24,6 +27,7 @@ public class Customer implements java.io.Serializable {
     @Column(name = "CREDIT_LIMIT", precision = 22, scale = 0)
     private BigDecimal creditLimit;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private Set<Order> orders = new HashSet<>();
 
