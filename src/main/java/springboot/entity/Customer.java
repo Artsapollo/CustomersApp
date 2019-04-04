@@ -93,25 +93,21 @@ public class Customer implements java.io.Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
         return Objects.equals(custNum, customer.custNum) &&
-                Objects.equals(salesrep, customer.salesrep) &&
                 Objects.equals(company, customer.company) &&
-                Objects.equals(creditLimit, customer.creditLimit) &&
-                Objects.equals(orders, customer.orders);
+                Objects.equals(creditLimit, customer.creditLimit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(custNum, salesrep, company, creditLimit, orders);
+        return Objects.hash(custNum, company, creditLimit);
     }
 
     @Override
     public String toString() {
         return "springboot.entity.Customer{" +
                 "custNum=" + custNum +
-                ", salesrep=" + salesrep +
                 ", company='" + company + '\'' +
                 ", creditLimit=" + creditLimit +
-                ", orders=" + orders +
                 '}';
     }
 }

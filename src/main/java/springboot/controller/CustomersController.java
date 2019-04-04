@@ -35,20 +35,22 @@ public class CustomersController {
     private CustomersService customersService;
 
     @GetMapping
-    public @ResponseBody
-    Set<Customer> getAllCustomers(){
+    @ResponseBody
+    public Set<Customer> getAllCustomers(){
         LOG.info("Getting all customers");
         Set<Customer> result = customersService.getAllCustomers();
         LOG.info("Successfully got all customers");
         return result;
     }
 
+
     @GetMapping("/{id}")
-    public @ResponseBody Customer getCustomerById (@PathVariable("id")BigDecimal id){
+    @ResponseBody
+    public Customer getCustomerById (@PathVariable("id")BigDecimal id){
         LOG.info("getCustomerById started, id={}", id);
-        Customer result = customersService.findCustomerById(id);
+        Customer customer = customersService.findCustomerById(id);
         LOG.info("getCustomerById done");
-        return result;
+        return customer;
     }
 
     @PostMapping
@@ -77,5 +79,4 @@ public class CustomersController {
         customersService.deleteCustomer(id);
         LOG.info("Customer deleted");
     }
-
 }

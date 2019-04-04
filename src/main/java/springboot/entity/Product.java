@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "PRODUCTS")
+@Table(name = "PRODUCTS", schema = "MA_STUDENT")
 public class Product implements java.io.Serializable {
     private String productId;
     private String mfrId;
