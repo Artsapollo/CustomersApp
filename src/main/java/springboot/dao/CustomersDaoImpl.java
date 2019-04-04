@@ -1,6 +1,8 @@
 package springboot.dao;
 
-import org.springframework.stereotype.Repository;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -10,11 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import springboot.entity.Customer;
 
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import springboot.entity.Customer;
 
 @Repository
 public class CustomersDaoImpl implements CustomersDao {
@@ -38,7 +37,7 @@ public class CustomersDaoImpl implements CustomersDao {
         Set<Customer> customers = new HashSet<>();
         try {
             sessionObj = sessionFactoryObj.openSession();
-            customers = new HashSet<>(sessionObj.createQuery("from Customer", Customer.class).list());
+            customers = new HashSet<>(sessionObj.createQuery(" FROM Customer", Customer.class).list());
         } catch (Exception sqlException) {
             sqlException.printStackTrace();
         } finally {
@@ -70,9 +69,7 @@ public class CustomersDaoImpl implements CustomersDao {
         try{
             sessionObj = sessionFactoryObj.openSession();
             sessionObj.beginTransaction();
-
             sessionObj.save(customer);
-
             sessionObj.getTransaction().commit();
             LOG.info("Customer was successfully added");
         } catch (Exception sqlException) {
