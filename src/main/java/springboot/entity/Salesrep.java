@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "SALESREPS")
+@Table(name = "SALESREPS", schema = "MA_STUDENT")
 public class Salesrep implements java.io.Serializable {
 
     private BigDecimal emplNum;

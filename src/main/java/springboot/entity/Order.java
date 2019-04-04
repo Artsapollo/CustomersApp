@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "ORDERS", schema = "MA_STUDENT")
 public class Order implements Serializable {
     private BigDecimal orderNum;
     private Customer customer;
